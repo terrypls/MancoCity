@@ -1,48 +1,27 @@
-import discord   #libreria de discord para python
-import ID        #Archivo con Token e ID usadas
-import Varios
-from Mancos import Shesho,David
-client = discord.Client()
+import discord  # libreria de discord para python
+import ID  # Archivo con Token e ID usadas
+from Varios import *
+from Diccionario import Key
+from Mancos import Shesho, David
 
+client = discord.Client()
 
 
 @client.event
 async def on_message(message):
-
     if message.author == client.user:
         return
-
-    if message.content.startswith('loli'):
-        msg = Varios.loli().format(message)
-        await client.send_message(message.channel, msg)
-
-    if message.content.startswith('manco'):
-        msg = Varios.manco().format(message)
-        await client.send_message(message.channel, msg)
-
-    if message.content.startswith('!hello'):
-        msg = Varios.hola().format(message)
-        await client.send_message(message.channel, msg)
-
-    if message.content.startswith('shesho'):
-        msg=Shesho.shesho().format(message)
-        await client.send_message(message.channel, msg)
-
-    if message.content.startswith('porno'):
-        msg = Varios.porno().format(message)
-        await client.send_message(message.channel, msg)
-
-    if message.content.startswith('F'):
-        msg = Varios.F().format(message)
-        await client.send_message(message.channel, msg, tts=True)
-
-    if message.content.startswith('oniichan'):
-        msg = Varios.Onichan().format(message)
-        await client.send_message(message.channel, msg, tts=True)
-
-    if message.content.startswith('hungria'):
-    	msg= David.hungaria().format(message)
-    	await client.send_message(message.channel,msg)
+    strMessage = message.content
+    llave = strMessage.split(" ", 1)
+    print(llave)
+    funcion = Key(llave[0])
+    text2speech = tts(llave[0])
+    if funcion:
+        msg = funcion.format(message)
+        if text2speech == -1:
+            await client.send_message(message.channel, msg)
+        else:
+            await client.send_message(message.channel, msg, tts=True)
 
 
 @client.event
@@ -51,5 +30,6 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
+
 
 client.run(ID.TOKEN)
