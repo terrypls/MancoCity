@@ -1,8 +1,8 @@
 import discord  # libreria de discord para python
 import ID  # Archivo con Token e ID usadas
 from Varios import *
-from Diccionario import Key
-from Mancos import Shesho, David
+from Diccionario import *
+
 
 client = discord.Client()
 
@@ -12,10 +12,13 @@ async def on_message(message):
     if message.author == client.user:
         return
     strMessage = message.content
-    llave = strMessage.split(" ", 1)
+    llave = strMessage.split(" ", 2)
     print(llave)
-    funcion = Key(llave[0])
     text2speech = tts(llave[0])
+    if llave[0] == '/agrega':
+        addFile(llave[1], llave[2]+'\n')
+        await client.send_message(message.channel, "agregado!")
+    funcion = Key(llave[0])
     if funcion:
         msg = funcion.format(message)
         if text2speech == -1:

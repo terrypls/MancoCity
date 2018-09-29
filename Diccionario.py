@@ -1,14 +1,23 @@
 import Varios
-from Mancos import Shesho
+diccionario = {"ayuda": Varios.ayuda()}
+def inicio():
+    file = open('Palabras.txt', 'r')
+    for line in file:
+        aux = line.split(" ", 1)
+        diccionario[aux[0]] = aux[1]
 
-diccionario = {"caca": "holi"}
-diccionario["hola"] = Varios.hola()
-diccionario["!F"] = Varios.F()
-diccionario["manco"] = Varios.manco()
-diccionario["!oniichan"] = Varios.Onichan()
-diccionario["loli"] = Varios.loli()
+    file.close()
 diccionario["porno"] = Varios.porno()
-diccionario["shesho"] = Shesho.shesho()
+
+
+
+def addFile(llave, valor):
+    file = open('Palabras.txt', 'a')
+    file.write(llave + ' ' + valor)
+    file.close()
+    inicio()
+
+
 
 def Key(llave):
     x = diccionario[llave]
