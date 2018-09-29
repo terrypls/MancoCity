@@ -1,5 +1,6 @@
 import Varios
 diccionario = {"ayuda": Varios.ayuda()}
+
 def inicio():
     file = open('Palabras.txt', 'r')
     for line in file:
@@ -8,6 +9,7 @@ def inicio():
 
     file.close()
 diccionario["porno"] = Varios.porno()
+
 
 
 

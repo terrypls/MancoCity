@@ -29,6 +29,7 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
+    inicio()
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
